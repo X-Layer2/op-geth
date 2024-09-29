@@ -55,8 +55,10 @@ type Config struct {
 	GasPrice            *big.Int       // Minimum gas price for mining a transaction
 	Recommit            time.Duration  // The time interval for miner to re-create mining work.
 
-	RollupComputePendingBlock bool   // Compute the pending block from tx-pool, instead of copying the latest-block
-	EffectiveGasCeil          uint64 // if non-zero, a gas ceiling to apply independent of the header's gaslimit value
+	RollupComputePendingBlock             bool // Compute the pending block from tx-pool, instead of copying the latest-block
+	RollupTransactionConditionalRateLimit int  // Total number of conditional cost units allowed in a second
+
+	EffectiveGasCeil uint64 // if non-zero, a gas ceiling to apply independent of the header's gaslimit value
 }
 
 // DefaultConfig contains default settings for miner.

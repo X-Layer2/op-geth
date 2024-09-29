@@ -155,6 +155,8 @@ var (
 		utils.GpoIgnoreGasPriceFlag,
 		utils.GpoMinSuggestedPriorityFeeFlag,
 		utils.RollupSequencerHTTPFlag,
+		utils.RollupSequencerTxConditionalEnabledFlag,
+		utils.RollupSequencerTxConditionalCostRateLimitFlag,
 		utils.RollupHistoricalRPCFlag,
 		utils.RollupHistoricalRPCTimeoutFlag,
 		utils.RollupDisableTxPoolGossipFlag,

@@ -976,6 +976,18 @@ var (
 		Category: flags.RollupCategory,
 		Value:    true,
 	}
+	RollupSequencerTxConditionalEnabledFlag = &cli.BoolFlag{
+		Name:     "rollup.sequencertxconditionalenabled",
+		Usage:    "Serve the eth_sendRawTransactionConditional endpoint and apply the conditional constraints on mempool inclusion & block building",
+		Category: flags.RollupCategory,
+		Value:    false,
+	}
+	RollupSequencerTxConditionalCostRateLimitFlag = &cli.IntFlag{
+		Name:     "rollup.sequencertxconditionalcostratelimit",
+		Usage:    "Maximum cost -- storage lookups -- allowed for conditional transactions in a given second",
+		Category: flags.RollupCategory,
+		Value:    5000,
+	}
 
 	// Metrics flags
 	MetricsEnabledFlag = &cli.BoolFlag{
@@ -1955,6 +1967,9 @@ func SetEthConfig(ctx *cli.Context, stack *node.Node, cfg *ethconfig.Config) {
 	cfg.RollupDisableTxPoolAdmission = cfg.RollupSequencerHTTP != "" && !ctx.Bool(RollupEnableTxPoolAdmissionFlag.Name)
 	cfg.RollupHaltOnIncompatibleProtocolVersion = ctx.String(RollupHaltOnIncompatibleProtocolVersionFlag.Name)
 	cfg.ApplySuperchainUpgrades = ctx.Bool(RollupSuperchainUpgradesFlag.Name)
+	cfg.RollupSequencerTxConditionalEnabled = ctx.Bool(RollupSequencerTxConditionalEnabledFlag.Name)
+	cfg.RollupSequencerTxConditionalCostRateLimit = ctx.Int(RollupSequencerTxConditionalCostRateLimitFlag.Name)
+
 	// Override any default configs for hard coded networks.
 	switch {
 	case ctx.Bool(MainnetFlag.Name):
